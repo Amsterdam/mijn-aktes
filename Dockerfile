@@ -1,4 +1,4 @@
-FROM amsterdam/python:3.8-buster-slim
+FROM amsterdam/python:3.8-buster
 
 MAINTAINER datapunt@amsterdam.nl
 

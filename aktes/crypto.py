@@ -2,7 +2,7 @@ from typing import Optional
 
 from cryptography.fernet import Fernet, InvalidToken
 
-from decosjoin.config import get_key
+from aktes.config import get_key
 
 
 def encrypt(plain_text: str, bsn: Optional[str] = '') -> str:
