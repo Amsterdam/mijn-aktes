@@ -1,16 +1,13 @@
 import logging
-from datetime import date, time
 
 import sentry_sdk
 from cryptography.fernet import InvalidToken
 from flask import Flask, request, make_response
-from flask.json import JSONEncoder
 from sentry_sdk.integrations.flask import FlaskIntegration
 from tma_saml import get_digi_d_bsn, InvalidBSNException, SamlVerificationException, get_e_herkenning_attribs, \
     HR_KVK_NUMBER_KEY
 
-from aktes.api.aktes.aktes_connection import AktesConnection
-from aktes.config import get_sentry_dsn, get_aktes_username, get_aktes_password, get_aktes_api_host
+from aktes.config import get_sentry_dsn, get_aktes_username, get_aktes_password, get_aktes_api_host, get_tma_certificate
 from aktes.crypto import decrypt
 
 logger = logging.getLogger(__name__)
@@ -94,11 +91,10 @@ def get_vergunningen():
             logger.error("Error", type(e), str(e))
             return {"status": "ERROR", "message": "Unknown Error"}, 400
 
-    connection = AktesConnection(get_aktes_username(), get_aktes_password(), get_aktes_api_host())
-    zaken = connection.get_zaken(kind, identifier)
+    # connection = AktesConnection(get_aktes_username(), get_aktes_password(), get_aktes_api_host())
     return {
         'status': 'OK',
-        'content': zaken,
+        'content': [],
     }
 
 
